@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="/path-to-your-favicon/favicon.png">
+</head>
+<body class="bg-gray-100">
+
+<!-- First Page - Instructions -->
+<div id="instructions-page" class="flex justify-center items-center h-screen">
+    <div class="text-center w-3/4 max-w-3xl">
+        <h1 class="text-3xl font-bold mb-8">Welcome to Gospel Explorer</h1>
+        <p class="text-xl mb-8">
+            We have created a chatbot to help individuals explore and strengthen their faith. We are wondering in what situations this might be helpful. On the next screen, you will be given access to a chatbot that understands the doctrines, history, and organization of the Church of Jesus Christ of Latter-day Saints. While it has been trained and configured in a specific way, the answers do not represent official church doctrine or policy but are provided as a safe space where you can explore and enhance your faith.
+            <br/><br/>
+            You will be given a few minutes to explore and interact with the chatbot. When the timer runs out, proceed to the survey where we will ask about your experience. When you are ready, click "Start the Experiment" to begin.
+        </p>
+        <button id="start-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start the Experiment</button>
+    </div>
+</div>
+
+<!-- Second Page - Experiment -->
+<div id="experiment-page" class="hidden h-screen flex flex-col justify-center items-center">
+    <div class="text-center w-full">
+        <h2 id="timer" class="text-3xl font-bold mb-4">0:30</h2>
+        <button id="survey-btn" class="hidden bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-8 rounded  mb-4">Go to Survey</button>
+        <!-- Chatbot Embed -->
+        <div id="chatbot-container" class="w-full flex-grow">
+            <iframe
+                src="https://www.chatbase.co/chatbot-iframe/YVPcuCTpE6N4OnuOg623d"
+                class="w-3/4 mx-auto"
+                style="min-height: 700px; height: calc(100% - 100px);"
+                frameborder="0">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+// Helper function to generate unique user ID
+function generateUniqueId() {
+    const date = new Date();
+    const randomPart = Math.random().toString(36).substring(2, 8); // Random string
+    return `${date.getFullYear()}${(date.getMonth()+1)}${date.getDate()}-${randomPart}`;
+}
+
+// Variables
+let timerInterval;
+let startTime;
+let chatbotRevealedTime;
+const uniqueId = generateUniqueId();
+
+// Event listener for "Start the Experiment" button
+document.getElementById('start-btn').addEventListener('click', () => {
+    document.getElementById('instructions-page').classList.add('hidden');
+    document.getElementById('experiment-page').classList.remove('hidden');
+    startCountdown(30); // 30 seconds countdown
+});
+
+// Countdown timer function
+function startCountdown(seconds) {
+    startTime = Date.now();
+    const timerElement = document.getElementById('timer');
+    timerInterval = setInterval(() => {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        timerElement.textContent = `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        seconds--;
+        if (seconds < 0) {
+            clearInterval(timerInterval);
+            document.getElementById('timer').classList.add('hidden');
+            document.getElementById('survey-btn').classList.remove('hidden');
+            chatbotRevealedTime = Date.now(); // Capture the time when chatbot was revealed
+        }
+    }, 1000);
+}
+
+// Event listener for "Go to Survey" button
+document.getElementById('survey-btn').addEventListener('click', () => {
+    const totalTime = Math.floor((Date.now() - chatbotRevealedTime) / 1000); // Total time in seconds
+    const surveyUrl = `https://www.survey.com?ID=${uniqueId}&TotalTime=${totalTime}`;
+    window.open(surveyUrl, '_blank');
+});
+
+</script>
+</body>
+</html>
