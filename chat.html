@@ -52,10 +52,17 @@
 <div id="selectbot-page" class="flex md: justify-center items-center h-screen p-4 md:p-0 hidden">
     <div class="text-center w-full md:w-3/4 max-w-3xl">
         <p class="text-lg md:text-xl mb-4 md:mb-8">
-            Please select which bot most closely asligns with your current religion (or any of them you you don't have a current religion).
-            <br/><br/>
-            [Insert list of religions here]
+            Please select which bot most closely aligns with your current religion 
+            <br/>(or any of them if you don't have a current religion).
         </p>
+        <div class="flex justify-center items-center">
+            <form id="religion-form" class="text-lg md:text-xl mb-4 md:mb-8 text-left max-w-md">
+                <label class="block"><input type="radio" name="religion" value="0" checked> Roman Catholic</label>
+                <label class="block"><input type="radio" name="religion" value="1"> Southern Baptist</label>
+                <label class="block"><input type="radio" name="religion" value="2"> The Church of Jesus Christ of Latter-day Saints</label>
+                <label class="block"><input type="radio" name="religion" value="3"> United Methodist</label>
+            </form>
+        </div>
         <button id="chat-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start the Experiment</button>
     </div>
 </div>
@@ -77,7 +84,7 @@
             <div id="chatbot-container" class="w-full h-full flex-grow relative">
             <iframe
                 id="chatbot-iframe"
-                src="https://www.chatbase.co/chatbot-iframe/YVPcuCTpE6N4OnuOg623d"
+                src="https://www.chatbase.co/chatbot-iframe/Hr63Mj8FbAUYja1DzQQNq"
                 class="w-full mx-auto h-full"
                 frameborder="0">
             </iframe>
@@ -92,6 +99,13 @@ function generateUniqueId() {
     const randomPart = Math.random().toString(36).substring(2, 8); // Random string
     return `${date.getFullYear()}${(date.getMonth()+1)}${date.getDate()}-${randomPart}`;
 }
+
+const chatbotIds = [
+    'Hr63Mj8FbAUYja1DzQQNq',  // Roman Catholic
+    'Uem08Rw2SvPsI1nPhS8nL', // Southern Baptist
+    'YVPcuCTpE6N4OnuOg623d', // The Church of Jesus Christ of Latter-day Saints
+    '-JW-36Uxisry3JSTPod81' // United Methodist
+];
 
 // Variables
 let timerInterval;
@@ -114,6 +128,11 @@ document.getElementById('selectbot-btn').addEventListener('click', () => {
 document.getElementById('chat-btn').addEventListener('click', () => {
     document.getElementById('selectbot-page').classList.add('hidden');
     document.getElementById('experiment-page').classList.remove('hidden');
+
+    const selectedReligionIndex = document.querySelector('input[name="religion"]:checked').value;
+    const iframe = document.getElementById('chatbot-iframe');
+    iframe.src = `https://www.chatbase.co/chatbot-iframe/${chatbotIds[selectedReligionIndex]}`;
+
     startCountdown(30); // 30 seconds countdown
 });
 
