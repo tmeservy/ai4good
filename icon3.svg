@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.55 25.39">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        font-size: 8.34px;
+      }
+
+      .cls-1, .cls-2 {
+        font-family: ArialRoundedMTBold, 'Arial Rounded MT Bold';
+      }
+
+      .cls-2 {
+        font-size: 17.24px;
+        letter-spacing: .2em;
+      }
+    </style>
+  </defs>
+  <rect y="16.33" width="23.55" height="8.38" rx="2" ry="2"/>
+  <text class="cls-1" transform="translate(.77 23.63) scale(.86 1)"><tspan x="0" y="0">GOOD</tspan></text>
+  <text class="cls-2" transform="translate(2.44 14.9) scale(.86 1)"><tspan x="0" y="0">AI</tspan></text>
+</svg>

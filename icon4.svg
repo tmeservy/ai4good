@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #7c0300;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-family: ArialRoundedMTBold, 'Arial Rounded MT Bold';
+        font-size: 22.33px;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M22.06,3.13c-1.26-1.27-2.92-1.96-4.7-1.96s-3.44.7-4.7,1.97h0c-.36.37-.95.37-1.31,0h-.01c-1.26-1.28-2.93-1.98-4.71-1.98s-3.44.7-4.69,1.96C.69,4.38,0,6.06,0,7.86,0,9.65.7,11.33,1.95,12.6l9.56,9.64c.13.13.31.21.48.21s.35-.07.48-.2l9.58-9.63c1.26-1.27,1.95-2.95,1.95-4.75,0-1.79-.68-3.48-1.94-4.75Z"/>
+  <text class="cls-2" transform="translate(.54 19.79) scale(.9 1)"><tspan x="0" y="0">AI</tspan></text>
+</svg>
