@@ -71,7 +71,7 @@
 <!-- - Experiment -->
 <div id="experiment-page" class="hidden h-screen flex items-center flex-col p-0">
     <div class="text-center md:w-3/4 lg:w-1/2 w-full">
-        <h2 id="instructions" class="text-md md:text-lg mb-4">Please interact with the chatbot for at least XX minutes.
+        <h2 id="instructions" class="text-md md:text-lg mb-4">Please interact with the chatbot for at least 5 minutes.
             A timer is provided for your convenience. 
         </h2>
         <h2 id="instructions2" class="hidden text-md md:text-lg mb-4">You can continue to use the chatbot as long as you would like. When you are ready, please complete the survey.
@@ -133,7 +133,7 @@ document.getElementById('chat-btn').addEventListener('click', () => {
     const iframe = document.getElementById('chatbot-iframe');
     iframe.src = `https://www.chatbase.co/chatbot-iframe/${chatbotIds[selectedReligionIndex]}`;
 
-    startCountdown(30); // 30 seconds countdown
+    startCountdown(10); // 10 seconds countdown
 });
 
 // Countdown timer function
@@ -159,7 +159,7 @@ function startCountdown(seconds) {
 // Event listener for "Go to Survey" button
 document.getElementById('survey-btn').addEventListener('click', () => {
     const totalTime = Math.floor((Date.now() - chatbotRevealedTime) / 1000); // Total time in seconds
-    const surveyUrl = `https://www.survey.com?ID=${uniqueId}&TotalTime=${totalTime}`;
+    const surveyUrl = `https://byu.az1.qualtrics.com/jfe/form/SV_aXcFcoNab2pjwXA?ChatBotID=${uniqueId}&TotalTime=${totalTime}`;
 
     // Redirecting to the survey URL
     window.open(surveyUrl, '_blank');
