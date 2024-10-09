@@ -41,6 +41,8 @@
         <p class="text-lg md:text-xl mb-4 md:mb-8">
             On the next screen, you will be given access to select a chatbot that understands the doctrines, history, and organization of various religions. You will make a selection of which chatbot to try. While each chatbot has been trained and configured in a specific way, the answers do not represent official church doctrine or policy but are provided as a safe space where you can explore and enhance your faith.
             <br/><br/>
+            Please be aware that ad blockers may interfere with the display of the chat interface. To ensure the experiment runs smoothly, we recommend temporarily disabling your ad blocker if you have one.
+            <br/><br/>
             You will be given a few minutes to explore and interact with the chatbot. When the timer runs out, proceed to the survey where we will ask about your experience. When you are ready, click "Next" to begin.
         </p>
         <button id="selectbot-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button>
@@ -107,6 +109,13 @@ const chatbotIds = [
     '-JW-36Uxisry3JSTPod81' // United Methodist
 ];
 
+// Extract URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const sonaID = urlParams.get('sonaID');
+const prolificID = urlParams.get('prolificID');
+const experimentID = urlParams.get('experimentID');
+
+
 // Variables
 let timerInterval;
 let startTime;
@@ -159,7 +168,23 @@ function startCountdown(seconds) {
 // Event listener for "Go to Survey" button
 document.getElementById('survey-btn').addEventListener('click', () => {
     const totalTime = Math.floor((Date.now() - chatbotRevealedTime) / 1000); // Total time in seconds
-    const surveyUrl = `https://byu.az1.qualtrics.com/jfe/form/SV_aXcFcoNab2pjwXA?ChatBotID=${uniqueId}&TotalTime=${totalTime}`;
+    let surveyUrl = `https://byu.az1.qualtrics.com/jfe/form/SV_aXcFcoNab2pjwXA?chatbotSessionID=${uniqueId}&totalTime=${totalTime}`;
+
+    // Append additional parameters if they exist
+    if (sonaID) {
+        surveyUrl += `&sonaID=${sonaID}`;
+    }
+    if (prolificID) {
+        surveyUrl += `&prolificID=${prolificID}`;
+    }
+    if (experimentID) {
+        surveyUrl += `&experimentID=${experimentID}`;
+    }
+    if (chatbotIds[selectedReligionIndex]) {
+        surveyUrl += `&chatbotID=${chatbotIds[selectedReligionIndex]}`;
+    }
+
+    
 
     // Redirecting to the survey URL
     window.open(surveyUrl, '_blank');

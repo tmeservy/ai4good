@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Redirect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="./icon2a.svg">
+</head>
+<body class="bg-gray-100">
+
+<div id="redirect-page" class="flex justify-center items-center h-screen p-4">
+    <div class="text-center w-full md:w-3/4 max-w-3xl">
+        <h1 id="status-header" class="text-2xl md:text-3xl font-bold mb-4"></h1>
+        <p id="status-message" class="text-lg md:text-xl mb-4"></p>
+    </div>
+</div>
+
+<script>
+// Array holding experiment IDs along with their open dates
+const experiments = [
+    { id: 'exp1', endDate: '2023-12-31' },  // Sample experiment with an end date
+    { id: 'aisslack', endDate: '2024-10-11'},
+    { id: 'forum', endDate: '2024-10-11' },
+    { id: 'other', endDate: '2024-10-11' }
+];
+
+// Function to check experiment status
+function checkExperimentStatus() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const experimentID = urlParams.get('experimentID');
+
+    const experiment = experiments.find(exp => exp.id === experimentID);
+
+    if (!experiment) {
+        displayMessage('Invalid Experiment', 'The experiment ID provided does not exist.');
+        return;
+    }
+
+    const currentDate = new Date();
+    const endDate = new Date(experiment.endDate);
+
+    if (currentDate <= endDate) {
+        redirectToExperimentPage(experimentID, window.location.search);
+    } else {
+        displayMessage('Experiment Closed', 'Thank you for your interest in participating in this research. This experiment is no longer open.');
+    }
+}
+
+// Function to display messages on the page
+function displayMessage(header, message) {
+    document.getElementById('status-header').textContent = header;
+    document.getElementById('status-message').textContent = message;
+}
+
+// Function to redirect to the main experiment page
+function redirectToExperimentPage(experimentID, searchParams) {
+    const baseURL = 'chat.html';
+    const redirectURL = `${baseURL}${searchParams}`;
+    window.location.href = redirectURL;
+}
+
+checkExperimentStatus();
+</script>
+
+</body>
+</html>
