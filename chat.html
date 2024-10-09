@@ -114,6 +114,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const sonaID = urlParams.get('sonaID');
 const prolificID = urlParams.get('prolificID');
 const experimentID = urlParams.get('experimentID');
+let selectedReligionIndex; // Declare it here to access globally
 
 
 // Variables
@@ -138,7 +139,7 @@ document.getElementById('chat-btn').addEventListener('click', () => {
     document.getElementById('selectbot-page').classList.add('hidden');
     document.getElementById('experiment-page').classList.remove('hidden');
 
-    const selectedReligionIndex = document.querySelector('input[name="religion"]:checked').value;
+    selectedReligionIndex = document.querySelector('input[name="religion"]:checked').value;
     const iframe = document.getElementById('chatbot-iframe');
     iframe.src = `https://www.chatbase.co/chatbot-iframe/${chatbotIds[selectedReligionIndex]}`;
 
