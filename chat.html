@@ -39,7 +39,7 @@
     <div class="text-center w-full md:w-3/4 max-w-3xl">
         <h1 class="text-2xl md:text-3xl font-bold mb-4 md:mb-8">Welcome to Gospel Chatbot</h1>
         <p class="text-lg md:text-xl mb-4 md:mb-8">
-            On the next screen, you will be given access to select a chatbot that understands the doctrines, history, and organization of various religions. You will make a selection of which chatbot to try. While each chatbot has been trained and configured in a specific way, the answers do not represent official church doctrine or policy but are provided as a safe space where you can explore and enhance your faith.
+            On the next screen, you will be given access to select a chatbot that understands the doctrines, history, and organization of various religions. While each chatbot has been trained and configured in a specific way, the answers do not represent official church doctrine or policy but are provided as a safe space where you can explore and enhance your faith.
             <br/><br/>
             Please be aware that ad blockers may interfere with the display of the chat interface. To ensure the experiment runs smoothly, we recommend temporarily disabling your ad blocker if you have one.
             <br/><br/>
@@ -143,7 +143,11 @@ document.getElementById('chat-btn').addEventListener('click', () => {
     const iframe = document.getElementById('chatbot-iframe');
     iframe.src = `https://www.chatbase.co/chatbot-iframe/${chatbotIds[selectedReligionIndex]}`;
 
-    startCountdown(10); // 10 seconds countdown
+    let timerValue = 300
+    if (experimentID='researcher') {
+        timerValue = 10
+    }
+    startCountdown(timerValue); // 10 seconds countdown
 });
 
 // Countdown timer function
